@@ -1,0 +1,29 @@
+NAME="hunspell-pl"
+VERSION=20160526
+RELEASE=1
+CATEGORY="Text"
+SUMMARY="Polish dictionary for Hunspell"
+DESCRIPTION="Hunspell is a spell checker and morphological analyzer library and
+program designed for languages with rich morphology and complex compounding or
+character encoding.
+This package provides a Polish dictionary for Hunspell."
+HOMEPAGE="http://sjp.pl/slownik/en/"
+SRC_URI="http://sjp.pl/slownik/ort/sjp-myspell-pl-${VERSION}.zip"
+SRC_DIR=.
+
+ARCH=noarch
+
+CYGPORT_USE_UNSTABLE_API=1
+src_unpack_hook() {
+	check_prog_req unzip
+	unzip pl_PL.zip
+}
+
+src_compile() { :; }
+
+src_install() {
+	cd ${S}
+	insinto /usr/share/myspell
+	doins *.aff *.dic
+	dodoc README*
+}
